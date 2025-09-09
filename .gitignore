@@ -1,0 +1,48 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+# Visual Studio files
+*.user
+*.suo
+*.userprefs
+*.vsp
+*.vspscc
+*.sln.iml
+
+# Rider specific
+.idea/
+*.sln.iml
+*.dotCover
+*.rider/
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+
+# NuGet
+[Nn]u[Gg]et/
+*.nupkg
+packages/
+
+# Docker
+[Dd]ocker-[Oo]utput/
+docker-compose.*.yml
+
+# Azure
+[Aa]zure-[Pp]ublish/
+*.pubxml
+
+# Tests
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+
+# MacOS
+.DS_Store
+
+# VS Code
+.vscode/
