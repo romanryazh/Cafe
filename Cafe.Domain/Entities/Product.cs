@@ -13,8 +13,6 @@ public class Product : EntityBase
     public Money Price { get; private set; }
     
     public ProductCategory Category { get; private set; }
-    
-    public bool IsActive { get; private set; }
 
     private Product()
     {
@@ -26,7 +24,6 @@ public class Product : EntityBase
         Description = description;
         Price = price;
         Category = category;
-        IsActive = true;
     }
 
     public static Product Create(string name, string description, Money price, ProductCategory category)
@@ -37,6 +34,19 @@ public class Product : EntityBase
         ValidateCategory(category);
         
         return new Product(name.Trim(), description.Trim(), price, category);
+    }
+
+    public void Update(string name, string description, Money price, ProductCategory category)
+    {
+        ValidateName(name);
+        ValidateDescription(description);
+        ValidatePrice(price);
+        ValidateCategory(category);
+        
+        Name = name;
+        Description = description;
+        Price = price;
+        Category = category;
     }
 
     private static void ValidateName(string name)
@@ -65,8 +75,4 @@ public class Product : EntityBase
         if (!Enum.IsDefined(category))
             throw new OrderingDomainException("Некорректная категория продукта");
     }
-
-    private void Activate() => IsActive = true;
-
-    private void Deactivate() => IsActive = false;
 }
