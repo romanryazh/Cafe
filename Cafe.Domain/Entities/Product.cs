@@ -18,7 +18,7 @@ public class Product : EntityBase
     {
     }
 
-    private Product(string name, string description, Money price, ProductCategory category) : base(Guid.NewGuid())
+    private Product(string name, string description, Money price, ProductCategory category) : base(Guid.CreateVersion7())
     {
         Name = name;
         Description = description;

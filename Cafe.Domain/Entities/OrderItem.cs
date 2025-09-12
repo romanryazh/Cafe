@@ -19,7 +19,7 @@ public class OrderItem : EntityBase
     {
     }
 
-    private OrderItem(Guid productId, string productName, Money unitPrice, int quantity)
+    private OrderItem(Guid productId, string productName, Money unitPrice, int quantity) : base(Guid.CreateVersion7())
     {
         ProductId = productId;
         ProductName = productName;
