@@ -1,8 +1,8 @@
 ﻿namespace Cafe.Domain.Entities;
 
-public class EntityBase
+public abstract class EntityBase
 {
-    public Guid Id { get; }
+    public Guid Id { get; protected set; }
 
     protected EntityBase()
     {
