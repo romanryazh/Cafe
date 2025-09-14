@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Cafe.Domain.Entities;
 
-namespace Cafe.Tests.Domain.UnitTests.FakeObjects;
+namespace Cafe.Tests.FakeObjects;
 
 public class OrderFakeObjectDataGenerator : IFakeObjectDataGenerator<Order>
 {

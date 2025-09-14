@@ -2,9 +2,8 @@
 using Cafe.Domain.Entities;
 using Cafe.Domain.Enums;
 using Cafe.Domain.ValueObjects;
-using FluentAssertions;
 
-namespace Cafe.Tests.Domain.UnitTests.FakeObjects;
+namespace Cafe.Tests.FakeObjects;
 
 public class ProductFakeObjectDataGenerator(IFakeObjectDataGenerator<Money> moneyGenerator) : IFakeObjectDataGenerator<Product>
 {

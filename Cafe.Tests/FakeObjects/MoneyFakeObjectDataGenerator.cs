@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Cafe.Domain.ValueObjects;
 
-namespace Cafe.Tests.Domain.UnitTests.FakeObjects;
+namespace Cafe.Tests.FakeObjects;
 
 public class MoneyFakeObjectDataGenerator : IFakeObjectDataGenerator<Money>
 {

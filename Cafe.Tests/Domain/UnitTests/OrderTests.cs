@@ -3,7 +3,7 @@ using Cafe.Domain.Entities;
 using Cafe.Domain.Enums;
 using Cafe.Domain.Exceptions;
 using Cafe.Domain.ValueObjects;
-using Cafe.Tests.Domain.UnitTests.FakeObjects;
+using Cafe.Tests.FakeObjects;
 using FluentAssertions;
 using Xunit;
 
@@ -12,17 +12,17 @@ namespace Cafe.Tests.Domain.UnitTests;
 public class OrderTests
 {
     private readonly Faker _faker = new();
-    private readonly IFakeObjectDataGenerator<Money> moneyGenerator;
-    private readonly IFakeObjectDataGenerator<Product> productGenerator;
-    private readonly IFakeObjectDataGenerator<OrderItem> orderItemGenerator;
-    private readonly IFakeObjectDataGenerator<Order> orderGenerator;
+    private readonly IFakeObjectDataGenerator<Money> _moneyGenerator;
+    private readonly IFakeObjectDataGenerator<Product> _productGenerator;
+    private readonly IFakeObjectDataGenerator<OrderItem> _orderItemGenerator;
+    private readonly IFakeObjectDataGenerator<Order> _orderGenerator;
 
     public OrderTests()
     {
-        moneyGenerator = new MoneyFakeObjectDataGenerator();
-        productGenerator = new ProductFakeObjectDataGenerator(moneyGenerator);
-        orderItemGenerator = new OrderItemFakeObjectDataGenerator(moneyGenerator);
-        orderGenerator = new OrderFakeObjectDataGenerator();
+        _moneyGenerator = new MoneyFakeObjectDataGenerator();
+        _productGenerator = new ProductFakeObjectDataGenerator(_moneyGenerator);
+        _orderItemGenerator = new OrderItemFakeObjectDataGenerator(_moneyGenerator);
+        _orderGenerator = new OrderFakeObjectDataGenerator();
     }
 
     [Fact]
@@ -55,8 +55,8 @@ public class OrderTests
     [Fact]
     public void AddProduct_WithValidProduct_ShouldThrowException()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
         var quantity = 2;
 
         order.AddItem(product, quantity);
@@ -72,8 +72,8 @@ public class OrderTests
     [Fact]
     public void AddItem_WithSameProduct_ShouldIncreaseQuantity()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
 
         order.AddItem(product, 2);
         order.AddItem(product, 5);
@@ -86,8 +86,8 @@ public class OrderTests
     [Fact]
     public void RemoveItem_WithValidQuantity_ShouldRemoveItem()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
 
         order.AddItem(product, 5);
         order.RemoveItem(product, 2);
@@ -99,8 +99,8 @@ public class OrderTests
     [Fact]
     public void RemoveItem_WithFullQuantity_ShouldRemoveItemCompletely()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
 
         order.AddItem(product, 5);
         order.RemoveItem(product, 5);
@@ -112,8 +112,8 @@ public class OrderTests
     [Fact]
     public void MarkAsPaid_WithItems_ShouldChangeOrderStatus()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
         order.AddItem(product, 1);
         
         order.MarkAsPaid();
@@ -124,7 +124,7 @@ public class OrderTests
     [Fact]
     public void MarkAsPaid_WithEmptyOrder_ShouldThrowException()
     {
-        var order = orderGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
         
         var action = () => order.MarkAsPaid();
         
@@ -134,8 +134,8 @@ public class OrderTests
     [Fact]
     public void MarkAsCompleted_FromPaidStatus_ShouldChangeStatus()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
         
         order.AddItem(product, 1);
         order.MarkAsPaid();
@@ -148,8 +148,8 @@ public class OrderTests
     [Fact]
     public void MarkAsCompleted_FromCreatedStatus_ShouldThrowException()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
         order.AddItem(product, 1);
         
         var action = () => order.MarkAsCompleted();
@@ -160,7 +160,7 @@ public class OrderTests
     [Fact]
     public void Cancel_FromCreatedStatus_ShouldChangeStatus()
     {
-        var order = orderGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
         
         order.Cancel();
         
@@ -170,8 +170,8 @@ public class OrderTests
     [Fact]
     public void Cancel_FromCompletedStatus_ShouldThrowException()
     {
-        var order = orderGenerator.GetFaker().Generate();
-        var product = productGenerator.GetFaker().Generate();
+        var order = _orderGenerator.GetFaker().Generate();
+        var product = _productGenerator.GetFaker().Generate();
         
         order.AddItem(product, 1);
         order.MarkAsPaid();

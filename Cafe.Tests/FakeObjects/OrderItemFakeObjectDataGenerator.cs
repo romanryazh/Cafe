@@ -2,7 +2,7 @@
 using Cafe.Domain.Entities;
 using Cafe.Domain.ValueObjects;
 
-namespace Cafe.Tests.Domain.UnitTests.FakeObjects;
+namespace Cafe.Tests.FakeObjects;
 
 public class OrderItemFakeObjectDataGenerator(IFakeObjectDataGenerator<Money> moneyGenerator)  : IFakeObjectDataGenerator<OrderItem>
 {
